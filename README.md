@@ -97,18 +97,14 @@ In the original dataset, only 0.2% of the user-trail pair had been rated. In ord
 
   
 ### Web deployment:
+ Both the content based and collaborative filtering based recommenders are deployed on the web using Flask and Heroku here: 
+ Feel free to give it a try! 
 
 
 
 ## Future directions:
-In order to improve the prediction accuracy, we could:  
-- Use the incorrectly predicted images to further train our model  
-- Add more images (through web scraping or data augmentation)  
-- Increase the model complexity to better capture the non-linear decision boundary
-
-Additionally, I'd like to:
-- Use transfer learning and compare prediction accuracy
-- Add additional cuisines and test performance
+ - Increase data quantity and improve sparsity by scraping more user ratings in order to improve model quality and performance evaluation metric
+ - Add trails from other states to the database and model, and add filtering function such that user can decide which state they want recommendations from.
 
 
 
