@@ -101,6 +101,11 @@ In the original dataset, only 0.2% of the user-trail pair had been rated. In ord
  Both the content based and collaborative filtering based recommenders are deployed on the web using Flask and Heroku here: 
  Feel free to give it a try! 
 
+<p align="center">
+  <img src="./images/web_app.png" >
+<br>
+<b>Figure x.</b> Normalized precision for random and CF filtering methods used
+</p>
 
 
 ## Future directions:
