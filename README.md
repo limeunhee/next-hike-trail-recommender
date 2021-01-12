@@ -47,9 +47,11 @@ From exploring the ratings data, it shows that very few users have average ratin
  
  Collaborative filtering based recommender is built on both user and item information. For example, if a user A liked trail A, and users B and C also liked trail A, trails that are liked by users B and C are recommended to user A. CF can give personalized recommendation based on individual user's taste, however it requires large data set with high sparsity and computation can be costly. 
 
-
-## Content based model
-  When a user likes a trail, it could be for the trail stats (certain user likes hike that is less than 3 miles with difficulty level easy) or for other features of the trail such as scenary, dog/family friendliness, whether the trail is paved or not, etc. In order to make suggestions that are based on both the stats and descriptions, two similarity matrices were calculated. Trail stats (distance/duration/eleation/difficulty) based similarity and trail descriptions (tags, short description, long description) based similarity. Feature standardization is used to account for the fact that trail stats had different scales and outliers, and difficulty rating (1-easy, 2-medium, 3-hard) were separated into dummy variables. For description based similarity matrix, NLP was used to create a bag of words, and TF-IDF was used to calculate similarity matrix. 
+### Content based recommendation
+  Similarity matrix between trails were calculated. Then, based on the user input, 5 trails with highest similarity was recommended to the user. Three different content based models were established:
+  1. Trail stats similarity : Features such as distance, elevation, difficulty were used to calculate similarity. Gives recommendations based on trails stats.
+  2. Text based similarity: Used NLP to obtain TF-IDF matrix, which was then converted to trail-trail similarity. Gives recommendations based on description of the trails (i.e scenary, accessibility, activities, trail conditions, etc) 
+  3. Hybrid similarity: Combination of stats and text based similarity. Gives recommendations based on both trail stats and description. 
   
   Below is an example output:
 <p align="center">
@@ -58,9 +60,7 @@ From exploring the ratings data, it shows that very few users have average ratin
 <b>Figure x.</b> Content based vs collaborative filtering based recommenders
 </p>
 
-The given input was 'Seven Falls Trail' located in Santa Barbara. It has distance of 3.2 miles, duration of 112 minutes, elevation of 843 fts, with difficulty level 2. The short description of the trail says
-
-```Seven Falls Trail is a 3.2 mile heavily trafficked out and back trail located near Santa Barbara, California that features a waterfall and is rated as moderate. The trail offers a number of activity options and is accessible year-round. Dogs are also able to use this trail.```
+The given input was 'Seven Falls Trail' located in Santa Barbara. It has distance of 3.2 miles, duration of 112 minutes, elevation of 843 fts, with difficulty level 2, and features waterfall/
 
 Using a trail stats based model, we see that recommended trails have trail stats very similar to that of the input trail. However, none of the trails feature waterfalls, which could be why the user liked Seen Falls trail. 
 
@@ -68,29 +68,33 @@ Next, using a text based model, 4 out of 5 recommendations feature water fall, b
 
 Lastly, by combining the trail stat and text based models, 3 out of 5 trails features waterfall and the trail stats are closer to the input trail compared to text based model. 
 
-## Collaborative filtering based model
-
- 
-
-### Baseline Model
-First, a baseline model is established by making random recommendations. 
-
-### Content based recommendation
-  Similarity matrix between trails were calculated. Then, based on the user input, 5 trails with highest similarity was recommended to the user. Three different content based models were established:
-  1. Trail stats similarity : Features such as distance, elevation, difficulty were used to calculate similarity. Gives recommendations based on trails stats.
-  2. Text based similarity: Used NLP to obtain TF-IDF matrix, which was then converted to trail-trail similarity. Gives recommendations based on description of the trails (i.e scenary, accessibility, activities, trail conditions, etc) 
-  3. Hybrid similarity: Combination of stats and text based similarity. Gives recommendations based on both trail stats and description. 
 
 ### Collaboratie filtering based recommendation 
-  Collaborative filtering based recommendation models were built that utilizes ratings given by users. By using the user ratings, more personnalized recommendations can be given. Two different collaborative filtering models were built to predict star rating for user-item pair, generate recommendation based on top 5 predicted ratings per user:
-  1. Item-item based collaobratie filtering: As there were more number of users than number of trails, item-item based filtering (as opposed to user-user based)
-  2. Matrix factorization: SVP was used to reduce dimensionality 
+  Collaborative filtering based recommendation models were built that utilizes ratings given by users. By using the user ratings, more personnalized recommendations can be given. Two categories of collaborative filtering were explored:
+  1. Item-item based collaobratie filtering: User-user based, item-item based filtering
+  2. Matrix factorization: SVD, SVDpp, NMF
+  
+In the original dataset, only 0.2% of the user-trail pair had been rated. In order to reduce the sparsity, a small dataset was generated by removing users and trails with low number of ratings. The small dataset had 10190 ratings from 784 users and 145 trails. 
   
   
-### Evaluation metrics
-  The most idealistic way to test recommender models would be to deploy the model and test the user response through A/B testing. As conducting such test is not possible, the existing data (or part of data) can be used to assess and compare performance. 
+#### Evaluation metrics
+  The most idealistic way to test recommender models would be to deploy the model and test the user response through A/B testing. As conducting such test is not possible, the existing data (or part of data) can be used to assess and compare performance. The next idealistic situation is having a large dataset with low sparsity. In this case, dataset can be split into train and test dataset, to test the performance of model in test set and adjust models for overfitting or underfitting. Unfortunately, this trail ratings dataset was small: after 80/20 train-test split, majority of the users in the test set would have 1 or 2 ratings left to check the performance of the model. Thus, evaluation using pre-established methods were not applicable, and a modified evaluation metric was established. One of the main limitation of below metric is the inability to check whether the model is overfitting.  
   
+  <p align="center">
+  <img src="./images/eval_metric.png" width=400/>
+<br>
+<b>Figure x.</b> Modified evaluation metric for limited datset used for comparing CF model performance 
+</p>
   
+  Five different models and a baseline model were compared using above precision metric. A baseline model is where 5 recommendations were given at random and its precision was 0.09. Precision for matrix factorization models were 1.5, 1.6, and 2.4 times the baseline precision for NMF, SVD, and SVDpp models respectively. For similarity based methods,  trail-trail similarity was 1.8 and user-user similarity was 6.9 times the baseline precision. With the assumption that the models are not overfitted, the lower precision for matrix factorization models could indicate that the data is not easily separatable using the decision planes from these models. On the otherhand, KNN basedmodel can give more highly convoluted decision boundary that beter fits the data.
+  
+    <p align="center">
+  <img src="./images/CF_precision_comparison" width=400/>
+<br>
+<b>Figure x.</b> Normalized precision for random and CF filtering methods used
+</p>
+
+
   
 ### Web deployment:
 
