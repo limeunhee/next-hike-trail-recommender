@@ -80,7 +80,7 @@ In the original dataset, only 0.2% of the user-trail pair had been rated. In ord
 #### Evaluation metrics
   The most idealistic way to test recommender models would be to deploy the model and test the user response through A/B testing. As conducting such test is not possible, the existing data (or part of data) can be used to assess and compare performance. The next idealistic situation is having a large dataset with low sparsity. In this case, dataset can be split into train and test dataset, to test the performance of model in test set and adjust models for overfitting or underfitting. Unfortunately, this trail ratings dataset was small: after 80/20 train-test split, majority of the users in the test set would have 1 or 2 ratings left to check the performance of the model. Thus, evaluation using pre-established methods were not applicable, and a modified evaluation metric was established. One of the main limitation of below metric is the inability to check whether the model is overfitting.  
   
-  <p align="center">
+<p align="center">
   <img src="./images/eval_metric.png" width=400/>
 <br>
 <b>Figure x.</b> Modified evaluation metric for limited datset used for comparing CF model performance 
@@ -88,7 +88,7 @@ In the original dataset, only 0.2% of the user-trail pair had been rated. In ord
   
   Five different models and a baseline model were compared using above precision metric. A baseline model is where 5 recommendations were given at random and its precision was 0.09. Precision for matrix factorization models were 1.5, 1.6, and 2.4 times the baseline precision for NMF, SVD, and SVDpp models respectively. For similarity based methods,  trail-trail similarity was 1.8 and user-user similarity was 6.9 times the baseline precision. With the assumption that the models are not overfitted, the lower precision for matrix factorization models could indicate that the data is not easily separatable using the decision planes from these models. On the otherhand, KNN basedmodel can give more highly convoluted decision boundary that beter fits the data.
   
-    <p align="center">
+<p align="center">
   <img src="./images/CF_precision_comparison" width=400/>
 <br>
 <b>Figure x.</b> Normalized precision for random and CF filtering methods used
