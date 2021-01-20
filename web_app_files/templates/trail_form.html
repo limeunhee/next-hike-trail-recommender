@@ -1,0 +1,62 @@
+<head>
+  <title>Trail Search Results</title>
+</head>
+
+<link rel="preconnect" href="https://fonts.gstatic.com"> 
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/materialize.min.css') }}">
+
+<style>
+  body {
+    font-family: Nunito;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  h3 {
+    text-align: center;
+  }
+
+  table {
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+  }
+
+  a {
+    text-decoration: none;
+    color: navy;
+    font-weight: 600;
+  }
+</style>
+
+<h1 style="margin-bottom: 0">Trails</h1>
+<h3 style="margin-top: 0">Click on your favorite trail to get recommendations!</h3>
+
+  {% if not output.empty %}
+  <table class="highlight">
+    <thead>
+      <tr>
+        <td style="font-weight: 600; padding-bottom: 5px; width: 60%; text-align: center;" >Name</td>
+        <td style="font-weight: 600; padding-bottom: 5px; width: 30%; text-align: center;">Location</td>
+        <td style="font-weight: 600; padding-bottom: 5px; width: 10%; text-align: center;">Distance<br>(mi)</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for i, row in output.iterrows() %}
+      <tr>
+        <td>
+          <a href="{{ url_for('recommendations', index_val=i) }}">
+            {{ row["name"] }}
+          </a>
+        </td>
+        <td>{{ row.location }}</td>
+        <td style="text-align: center;">{{ row.distance }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}

@@ -1,0 +1,120 @@
+<link rel="preconnect" href="https://fonts.gstatic.com"> 
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/materialize.min.css') }}">
+
+<style>
+    body {
+        font-family: "Nunito", "sans-serif";
+    }
+
+    .bg-image {
+        width: 100%;
+        opacity: 80%;
+    }
+
+    form {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .search-form {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(255,255,255, 0.5);
+        width: 800px;
+        display: block;
+        margin: 15% auto 15% auto;
+    }
+    .form-info-text {
+        text-align: center;
+        font-size: 200%;
+    }
+
+    input[type=text] {
+    font-family: "Nunito", "sans-serif";
+    display:block;
+    margin: auto;
+    font-size: 150%;
+    height: 30px;
+    width: 100%;
+    }
+
+    input[type=text]::placeholder{
+        color:olive;
+    }
+
+    input[type=submit] {
+    font-family: "Nunito", "sans-serif";
+    display:block;
+    margin: 10px auto 10px auto;
+    padding: 5px 15px 5px 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: #2e7d32;
+    opacity: 80%;
+    color: white;
+    font-size: 20px;
+    height: 50px;
+    width: 40%;
+    }
+
+    input[type=submit]:hover {
+        opacity: 100%;
+        font-size: 22px;
+        cursor: pointer;
+    }
+
+    .search-container {
+        background-image: url("../static/img/bg.jpg");
+        opacity: 90%;
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 0;
+        padding-top: 66.64%;
+        position: relative;
+    }
+
+
+</style>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Next Hike</title>
+    </head>
+    <body>
+    <!-- page content -->
+    <nav>
+        <div class="nav-wrapper green darken-3" style="padding-left: 10px;">
+            <a href="#" class="brand-logo">Next Hike</a>
+        </div>
+    </nav>
+
+    <div class="search-container" >
+        <div class="search-form">
+            <p class="form-info-text">
+             Search for your favorite trail<br>  
+         </p>
+        
+        <form action="/trail_search_result" target="_blank" method="POST">
+        <input type="text" name="user_input" placeholder="e.g. Yosemite" style="font-size: 18pt"/>
+        <input type="submit" value="Search"/>
+        </form>
+
+        <p class="form-info-text">
+            If you need some options <br>  
+        </p>
+
+        <form action="/CF_input" target="_blank" method="POST">
+        <input type="submit" value="Give me some options"/>
+        </form>
+        </div>
+    </div>
+
+
+    </body>
+    </html>
