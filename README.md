@@ -104,7 +104,7 @@ In the original dataset, only 0.2% of the user-trail pair had been rated. In ord
 <p align="center">
   <img src="./images/web_app.png" >
 <br>
-<b>Figure x.</b> Normalized precision for random and CF filtering methods used
+<b>Figure x.</b> Next Hike Web App 
 </p>
 
 
