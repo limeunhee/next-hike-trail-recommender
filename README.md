@@ -1,4 +1,4 @@
-# Next Hike
+# Next Hike (http://nexthike.herokuapp.com)
 
 ## A Content based trail recommender
 
