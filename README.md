@@ -23,7 +23,7 @@ Trail stats(i.e elevations, duration, distance) are highly right skewed distritu
 <p align="center">
   <img src="./images/trailstats.png" >
 <br>
-<b>Figure x.</b> Content based vs collaborative filtering based recommenders
+<b>Figure 1.</b> Content based vs collaborative filtering based recommenders
 </p>
  
 From exploring the ratings data, it shows that very few users have average rating 3 or below. Majority of the users have given average rating of 4 or above. Similarly, most of the trails had average rating between 4-5 stars. From number of reviews vs trails plot, we see the typical long tail plot where there are very few items that has large number of reviews, and majority of items having very small number of reviews. However, the area under the two sections can be similar. 
@@ -31,7 +31,7 @@ From exploring the ratings data, it shows that very few users have average ratin
  <p align="center">
   <img src="./images/ratingstats.png" >
 <br>
-<b>Figure x.</b> Content based vs collaborative filtering based recommenders
+<b>Figure 2.</b> Content based vs collaborative filtering based recommenders
 </p>
  
 
@@ -40,7 +40,7 @@ From exploring the ratings data, it shows that very few users have average ratin
 <p align="center">
   <img src="./images/filtering_methods.png" >
 <br>
-<b>Figure x.</b> Content based vs collaborative filtering based recommenders
+<b>Figure 3.</b> Content based vs collaborative filtering based recommenders
 </p>
  
  Content based recommender is a recommender system that is built on the item (i.e trail) information only. For example, if a user liked trail A, the recommender finds other trails that are similar to trail A based on information it has on all the trails. Then it generates a list of top n trails for the user. CB is easy to scale as it doesn't require user profiles, however, gives same recommendation regardless of user's personal taste. 
@@ -61,7 +61,7 @@ From exploring the ratings data, it shows that very few users have average ratin
 <p align="center">
   <img src="./images/CB_example.png" >
 <br>
-<b>Figure x.</b> Content based vs collaborative filtering based recommenders
+<b>Figure 4.</b> Content based vs collaborative filtering based recommenders
 </p>
 
 The first example input is 'Seven Falls Trail' located in Santa Barbara that features water fall and the second example is 'El Moro" trail that features horseback riding and coastal view. Recommendations for both examples include trails with similar features as the input with trail stats that are similar to the input trail stats. 
@@ -79,7 +79,7 @@ The first example input is 'Seven Falls Trail' located in Santa Barbara that fea
 <p align="center">
   <img src="./images/CF_precision_comparison.png" >
 <br>
-<b>Figure x.</b> Normalized precision for random and CF filtering methods used
+<b>Figure 5.</b> Normalized precision for random and CF filtering methods used
 </p>
 
 
@@ -89,11 +89,11 @@ The first example input is 'Seven Falls Trail' located in Santa Barbara that fea
 
 ### Web deployment:
  Both the content based and collaborative filtering based recommenders are deployed on the web using Flask and Heroku here: 
- Feel free to give it a try! 
+ Feel free to give it a try!   http://nexthike.herokuapp.com
 
 <p align="center">
-  <img src="./images/web_app.png" >
+  <img src="./images/webapp.png" >
 <br>
-<b>Figure x.</b> Next Hike Web App 
+<b>Figure 6.</b> Next Hike Web App 
 </p>
 
